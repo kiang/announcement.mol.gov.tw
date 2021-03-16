@@ -19,11 +19,11 @@ file_put_contents(__DIR__ . '/data.zip', $client->getResponse()->getContent());
 
 $za = new ZipArchive();
 
-if($za->open('data.zip')) {
+if($za->open(__DIR__ . '/data.zip')) {
     for( $i = 0; $i < $za->numFiles; $i++ ){
         $stat = $za->statIndex( $i );
         $filename = $za->getNameIndex($i);
         $parts = explode('-', $filename);
-        copy('zip://data.zip#'.$filename, __DIR__ . '/' . $parts[1] . '.csv');
+        copy('zip://' . __DIR__ . '/data.zip#'.$filename, __DIR__ . '/' . $parts[1] . '.csv');
     }
 }
