@@ -1,18 +1,1 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Error 500</title>
-    </head>
-    <body style="background-color: #f1f1f1;">
-        <div style="position: absolute;left: 36%;top: 36%;margin-top: -100px;margin-left: -100px;">
-            <div style="text-align: center;">
-                <img src="/img/error.jpg">
-            </div>
-            <div style="font-weight: 900;color: #ff0000;font-size: 27pt;display: flex">
-                500： 系統發生錯誤，請撥打 0800-226-555。</div>
-                <div style="font-weight: 900;color: #ff0000;font-size: 27pt;text-align: center"><a href="/">回首頁</a></div>
-
-        </div>
-    </body>
-</html>
+請輸入搜尋條件
