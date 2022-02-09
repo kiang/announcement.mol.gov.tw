@@ -5,7 +5,7 @@ $now = date('Y-m-d H:i:s');
 
 exec("cd {$rootPath} && /usr/bin/git pull");
 
-exec("/usr/bin/php -q {$rootPath}/Crawler.php");
+exec("/usr/bin/php -q {$rootPath}/01_fetch.php");
 
 exec("cd {$rootPath} && /usr/bin/git add -A");
 
