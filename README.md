@@ -1,10 +1,10 @@
-# 勞動部公告資料檔案庫
+# 違反勞動法令事業單位資料檔案庫
 
-This repository archives data from the Ministry of Labor's announcement platform (https://announcement.mol.gov.tw/).
+This repository archives data from the Ministry of Labor's Violation Query System (違反勞動法令事業單位（雇主）查詢系統).
 
 ## About
 
-This is an archive of public announcements and data from Taiwan's Ministry of Labor (勞動部). The data is automatically collected from the official website for research and reference purposes.
+This is an archive of labor law violation records published by Taiwan's Ministry of Labor (勞動部). The data is automatically collected from the official query system for research and reference purposes.
 
 ## Data Structure
 
@@ -12,8 +12,9 @@ The data is organized by date and stored in JSON format. Each file contains anno
 
 ## Data Source
 
-- Source Website: https://announcement.mol.gov.tw/
-- Data is collected through automated scripts
+- Source System: 違反勞動法令事業單位（雇主）查詢系統
+- Query URL: https://announcement.mol.gov.tw/
+- Data includes labor law violations by employers
 - Updates are performed periodically to maintain current records
 
 ## License
@@ -22,4 +23,4 @@ The data is sourced from government public announcements. Please refer to the or
 
 ## Note
 
-This is an unofficial archive. For official announcements, please refer to the [Ministry of Labor's official website](https://announcement.mol.gov.tw/).
+This is an unofficial archive. For official records, please refer to the [Ministry of Labor's Violation Query System](https://announcement.mol.gov.tw/).
