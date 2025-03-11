@@ -58,6 +58,7 @@ foreach($resources AS $resourceId => $resourceName) {
         if(false !== $pos) {
             $finalLine['處分字號'] = substr($finalLine['處分字號'], 0, $pos + 3);
         }
+        $finalLine['處分字號'] = preg_replace('/\s+/u', '', $finalLine['處分字號']);
         file_put_contents("{$dataPath}/{$finalLine['處分字號']}.json", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 }
