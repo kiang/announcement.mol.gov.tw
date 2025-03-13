@@ -47,7 +47,8 @@ foreach($resources AS $resourceId => $resourceName) {
         }
         $finalLine = [];
         foreach ($baseHead as $key) {
-            $finalLine[$key] = $data[$key];
+            $finalLine[$key] = preg_replace('/\s+/u', '', $data[$key]);
+            $finalLine[$key] = str_replace('/', '_', $finalLine[$key]);
         }
         $year = substr($finalLine['處分日期'], 0, 4);
         $dataPath = "{$basePath}/data/{$year}/{$finalLine['主管機關']}";
@@ -58,7 +59,6 @@ foreach($resources AS $resourceId => $resourceName) {
         if(false !== $pos) {
             $finalLine['處分字號'] = substr($finalLine['處分字號'], 0, $pos + 3);
         }
-        $finalLine['處分字號'] = preg_replace('/\s+/u', '', $finalLine['處分字號']);
-        file_put_contents("{$dataPath}/{$finalLine['處分字號']}.json", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        file_put_contents("{$dataPath}/{$finalLine['處分字號']}_{$finalLine['事業單位名稱或負責人']}.json", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 }

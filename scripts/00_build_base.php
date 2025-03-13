@@ -2,6 +2,9 @@
 /**
  * extract all commits using command
  * ```git rev-list --all | xargs -L1 sh -c 'mkdir "/home/kiang/public_html/mol-rev/$0" && git archive --format=tar $0 | tar -C "/home/kiang/public_html/mol-rev/$0" -xf -'```
+ * 
+ * get all csv files
+ * ```find /home/kiang/public_html/mol-rev/ -type f | grep csv$ > /home/kiang/public_html/announcement.mol.gov.tw/scripts/csvfiles```
  */
 $fh = fopen(__DIR__ . '/csvfiles', 'r');
 $basePath = dirname(__DIR__);
@@ -27,7 +30,8 @@ while ($line = fgets($fh)) {
         }
         $finalLine = [];
         foreach ($baseHead as $key) {
-            $finalLine[$key] = $data[$key];
+            $finalLine[$key] = preg_replace('/\s+/u', '', $data[$key]);
+            $finalLine[$key] = str_replace('/', '_', $finalLine[$key]);
         }
         $year = substr($finalLine['處分日期'], 0, 4);
         $dataPath = "{$basePath}/data/{$year}/{$finalLine['主管機關']}";
@@ -38,6 +42,6 @@ while ($line = fgets($fh)) {
         if(false !== $pos) {
             $finalLine['處分字號'] = substr($finalLine['處分字號'], 0, $pos + 3);
         }
-        file_put_contents("{$dataPath}/{$finalLine['處分字號']}.json", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        file_put_contents("{$dataPath}/{$finalLine['處分字號']}_{$finalLine['事業單位名稱或負責人']}.json", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 }
