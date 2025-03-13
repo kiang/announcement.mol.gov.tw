@@ -42,6 +42,7 @@ while ($line = fgets($fh)) {
         if(false !== $pos) {
             $finalLine['處分字號'] = substr($finalLine['處分字號'], 0, $pos + 3);
         }
-        file_put_contents("{$dataPath}/{$finalLine['處分字號']}_{$finalLine['事業單位名稱或負責人']}.json", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        $filename = $finalLine['處分字號'] . '_' . mb_substr($finalLine['事業單位名稱或負責人'], 0, 10, 'utf-8') . '_' . mb_substr($finalLine['違法法規法條'], 0, 10, 'utf-8') . '.json';
+        file_put_contents("{$dataPath}/{$filename}", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 }
