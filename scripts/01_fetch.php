@@ -49,7 +49,7 @@ foreach($resources AS $resourceId => $resourceName) {
         $finalLine = [];
         foreach ($baseHead as $key) {
             $finalLine[$key] = html_entity_decode($data[$key]);
-            $finalLine[$key] = preg_replace('/\s+/u', '', $data[$key]);
+            $finalLine[$key] = preg_replace('/\s+/u', '', $finalLine[$key]);
             $finalLine[$key] = str_replace('/', '_', $finalLine[$key]);
         }
         $year = substr($finalLine['處分日期'], 0, 4);
@@ -62,6 +62,7 @@ foreach($resources AS $resourceId => $resourceName) {
             $finalLine['處分字號'] = substr($finalLine['處分字號'], 0, $pos + 3);
         }
         $filename = $finalLine['處分字號'] . '_' . mb_substr($finalLine['事業單位名稱或負責人'], 0, 10, 'utf-8') . '_' . mb_substr($finalLine['違法法規法條'], 0, 10, 'utf-8') . '.json';
-        file_put_contents("{$dataPath}/{$filename}", json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        $targetFile = str_replace(chr(0), '', "{$dataPath}/{$filename}");
+        file_put_contents($targetFile, json_encode($finalLine, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 }
