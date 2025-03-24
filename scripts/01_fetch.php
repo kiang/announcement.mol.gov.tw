@@ -48,6 +48,7 @@ foreach($resources AS $resourceId => $resourceName) {
         }
         $finalLine = [];
         foreach ($baseHead as $key) {
+            $finalLine[$key] = html_entity_decode($data[$key]);
             $finalLine[$key] = preg_replace('/\s+/u', '', $data[$key]);
             $finalLine[$key] = str_replace('/', '_', $finalLine[$key]);
         }
