@@ -21,6 +21,7 @@ $tr = [
     '�' => '',
     '' => '',
 ];
+$pool = [];
 foreach (glob('data/*/*/*.json') as $file) {
     $data = json_decode(file_get_contents($file), true);
     $codePointPos = strpos($data['事業單位名稱或負責人'], '&#');
@@ -51,9 +52,7 @@ foreach (glob('data/*/*/*.json') as $file) {
     if (empty($company)) {
         continue;
     }
-    if(false !== strpos($company, chr(0))) {
-        die('error: ' . $company);
-    }
+    $pool[$company] = true;
     $targetFile = $companyPath . '/' . $company . '.csv';
     if (!file_exists($targetFile)) {
         $fh = fopen($targetFile, 'w');
@@ -64,3 +63,5 @@ foreach (glob('data/*/*/*.json') as $file) {
     fputcsv($fh, $data);
     fclose($fh);
 }
+
+file_put_contents(dirname(__DIR__) . '/docs/company.csv', implode("\n", array_keys($pool)));
