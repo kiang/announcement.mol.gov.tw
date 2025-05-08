@@ -52,6 +52,21 @@ foreach (glob('data/*/*/*.json') as $file) {
     if (empty($company)) {
         continue;
     }
+    // Fetch and save API result if not already present
+    $apiDir = dirname(__DIR__) . '/docs/gcis.nat.g0v.tw';
+    if (!is_dir($apiDir)) {
+        mkdir($apiDir, 0777, true);
+    }
+    $apiFile = $apiDir . '/' . $company . '.json';
+    if (!file_exists($apiFile)) {
+        $encodedName = urlencode($company);
+        $apiUrl = "http://gcis.nat.g0v.tw/api/search/?q={$encodedName}";
+        $apiResult = @file_get_contents($apiUrl);
+        if ($apiResult !== false) {
+            file_put_contents($apiFile, $apiResult);
+        }
+        sleep(1);
+    }
     $pool[$company] = true;
     $targetFile = $companyPath . '/' . $company . '.csv';
     if (!file_exists($targetFile)) {
