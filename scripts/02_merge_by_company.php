@@ -65,7 +65,6 @@ foreach (glob('data/*/*/*.json') as $file) {
         if ($apiResult !== false) {
             file_put_contents($apiFile, $apiResult);
         }
-        sleep(1);
     }
     $pool[$company] = true;
     $targetFile = $companyPath . '/' . $company . '.csv';
